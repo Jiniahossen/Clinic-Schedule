@@ -8,25 +8,24 @@ import { GiNotebook } from "react-icons/gi";
 import { FiMenu } from "react-icons/fi";
 import { GiVerticalBanner } from "react-icons/gi";
 import { CgNotes } from "react-icons/cg";
-import { LuShoppingBag } from "react-icons/lu";
 import { MdOutlineContactPhone } from "react-icons/md";
 import useAuth from "../hooks/useAuth";
 
 const Dashboard = () => {
-    const isAdmin = true;
+    const isAdmin = false;
     const { user } = useAuth();
 
     return (
         <div className=" flex max-w-full min-h-screen">
             <div className="p-6 w-80 bg-white text-black border border-r-[#219f85] ">
                 <div className=" w-72 mx-auto p-6">
-                    <h1 className=" text-lg md:text-2xl font-serif font-bold  text-[#219f85]">CliniSchedule</h1>
+                    <h1 className=" text-xl  md:text-2xl font-serif font-bold  text-[#219f85]">CliniSchedule</h1>
 
                     {
                         !isAdmin ? <>
-                            <div className="flex  gap-2">
-                                <img src={user?.photoUrl} alt="" className=" h-20 w-20 rounded-full" />
-                                <h1 className=" text-base font-serif text-black">{user?.displayName}</h1>
+                            <div className="gap-2">
+                                <img src={user?.photoURL} alt="" className="pb-2 h-20 w-20 rounded-full" />
+                                <h1 className=" text-base font-serif font-semibold text-black">User: {user?.displayName}</h1>
                             </div>
                             <Link>
                                 <p className="pt-4 text-md text-blue-500 font-serif">Edit Profile</p>
@@ -109,17 +108,11 @@ const Dashboard = () => {
                         <FaHouseUser className=" text-lg md:text-2xl"></FaHouseUser>
                         Home</NavLink>
                     </li>
-                    <li><NavLink to='/ourmenu' className={({ isActive, isPending }) =>
+                    <li><NavLink to='/all-tests' className={({ isActive, isPending }) =>
                         isPending ? "px-2 py-1 bg-none text-lg text-white font-serif " : isActive ? "px-2 py-1 text-[#219f85] text-lg font-serif" : ""
                     }>
                         <FiMenu className=" text-lg md:text-2xl"></FiMenu>
-                        Menu</NavLink>
-                    </li>
-                    <li><NavLink to='/ourmenu' className={({ isActive, isPending }) =>
-                        isPending ? "px-2 py-1 bg-none text-lg text-white font-serif " : isActive ? "px-2 py-1 text-[#219f85] text-lg font-serif" : ""
-                    }>
-                        <LuShoppingBag className="text-lg md:text-2xl"></LuShoppingBag>
-                        Shop</NavLink>
+                        All Test</NavLink>
                     </li>
                     <li><NavLink to='/contactus' className={({ isActive, isPending }) =>
                         isPending ? "px-2 py-1 bg-none text-lg text-white font-serif " : isActive ? "px-2 py-1 text-[#219f85] text-lg font-serif" : ""

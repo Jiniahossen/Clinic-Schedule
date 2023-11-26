@@ -32,10 +32,11 @@ const SignUp = () => {
         updateUserProfile(name, imageData?.data?.display_url)
           .then(() => {
             const userInfo = {
-              name: form.name.value,
-              email: form.email.value,
+              name: user.displayName,
+              email: user.email,
 
             }
+            console.log(userInfo);
             axiosPublic.post('/users', userInfo)
               .then((res) => {
                 if (res.data.insertedId) {

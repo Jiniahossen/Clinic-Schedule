@@ -33,7 +33,7 @@ const Navbar = ({ children }) => {
                                         {/* <h1 className=" text-[#f47723] font-extrabold font-serif text-2xl">Apply4you</h1> */}
                                     </div>
                                 </div>
-                                <div className="flex-none  lg:block text-lg font-serif me-0 md:me-32 " id="large-device-menu">
+                                <div  className="flex-none  lg:block text-lg font-serif me-0 md:me-32 " id="large-device-menu" >
                                     <ul className=" menu-horizontal gap-6">
                                         {/* Navbar menu content here */}
                                         <div >
@@ -70,7 +70,7 @@ const Navbar = ({ children }) => {
                                     </ul>
                                 </div>
 
-                                <div className="navbar-end text-lg font-serif items-center">
+                                <div className="navbar-end text-lg font-serif">
                                     <>
                                         {
                                             user ?
