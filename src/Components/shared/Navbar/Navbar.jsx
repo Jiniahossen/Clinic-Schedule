@@ -1,12 +1,17 @@
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import { FaUserAlt } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const Navbar = ({ children }) => {
-    const { user } = useAuth();
     
-    const handleSignOutButton = () => {
+    const { user, logOut } = useAuth()
 
+    const handleLogOut = () => {
+        logOut()
+            .then(res => {
+                Swal.fire("You have logged out!");
+            })
     }
     return (
         <div>
@@ -78,7 +83,7 @@ const Navbar = ({ children }) => {
                                                         </label>
                                                         <ul tabIndex={0} className="mt-3 z-[1] shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-40 gap-2">
                                                             <li>{user.displayName}</li>
-                                                            <li><button className=" text-[#219f85] px-4 font-serif" onClick={handleSignOutButton}>Logout</button></li>
+                                                            <li><button className=" text-[#219f85] px-4 font-serif" onClick={handleLogOut}>Logout</button></li>
                                                         </ul>
                                                     </div>
                                                 </div>

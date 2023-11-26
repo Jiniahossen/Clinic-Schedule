@@ -1,14 +1,18 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import useAuth from '../../hooks/useAuth';
 import GoogleSignIn from '../../Components/shared/GoogleSignIn/GoogleSignIn';
 import { imageUpload } from '../../hooks/useImages';
+import Swal from 'sweetalert2';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
 
 
 const SignUp = () => {
-
+  const navigate = useNavigate()
+  const axiosPublic = useAxiosPublic();
   const { createUser, updateUserProfile } = useAuth()
 
   const handleSignUp = async (e) => {
+
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
@@ -19,22 +23,33 @@ const SignUp = () => {
     console.log("Name:", name);
     console.log("Email:", email);
     console.log("Image:", image);
-    try {
-      const imageData = await imageUpload(image)
+    const imageData = await imageUpload(image);
 
-      // //2. User Registration
-      // const result = await createUser(email, password)
+    createUser(email, password)
+      .then(res => {
+        const user = res.user;
+        console.log(user);
+        updateUserProfile(name, imageData?.data?.display_url)
+          .then(() => {
+            const userInfo = {
+              name: form.name.value,
+              email: form.email.value,
 
-      // //3. Save username & profile photo
-      // await updateUserProfile(name, imageData?.data?.display_url)
-      // console.log(result)
+            }
+            axiosPublic.post('/users', userInfo)
+              .then((res) => {
+                if (res.data.insertedId) {
+                  Swal.fire("Account create successfully");
+                  navigate('/')
+                }
+              })
+          })
+      })
+      .catch(error => {
+        console.log(error);
+        Swal.fire(`${error}`);
+      });
 
-      // //4. save user data in database
-      // const dbResponse = await saveUser(result?.user)
-      // console.log(dbResponse)
-    } catch (err) {
-      console.error("Error in handleSignUp:", err);
-    }
   };
 
   return (
@@ -124,10 +139,10 @@ const SignUp = () => {
           </p>
           <div className='flex-1 h-px sm:w-16 dark:bg-gray-700'></div>
         </div>
-       
-       {/* google sign in */}
 
-       <GoogleSignIn></GoogleSignIn>
+        {/* google sign in */}
+
+        <GoogleSignIn></GoogleSignIn>
         <p className='px-6 text-sm text-center text-gray-400'>
           Already have an account?{' '}
           <Link
