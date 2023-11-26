@@ -16,6 +16,7 @@ import AddBanner from "../pages/Dashboard/Admin/AddBanner";
 import AllBanners from "../pages/Dashboard/Admin/AllBanners";
 import UserTest from "../pages/Dashboard/User/UserTest";
 import Alltest from "../pages/AllTest/Alltest";
+import Details from "../pages/Details.jsx/Details";
 
 const Router = createBrowserRouter(
     [
@@ -30,6 +31,11 @@ const Router = createBrowserRouter(
                 {
                     path:'/all-tests',
                     element:<Alltest></Alltest>
+                },
+                {
+                    path:'/details/:id',
+                    element:<Details></Details>,
+                    loader:({params})=>fetch(`http://localhost:5000/tests/${params.id}`)
                 }
             ]
         },

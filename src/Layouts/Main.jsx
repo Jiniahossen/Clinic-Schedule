@@ -1,4 +1,5 @@
-import Footer from "../Components/Footer/Footer";
+
+import Footer from "../Components/shared/Footer/Footer";
 import Navbar from "../Components/shared/Navbar/Navbar";
 import { Outlet } from "react-router-dom";
 

@@ -1,10 +1,9 @@
-import  { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const useTests = () => {
     const [items, setItems] = useState([]);
-    const [loading,setLoading]=useState(true);
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
-
         fetch('http://localhost:5000/tests')
             .then((res) => res.json())
             .then((data) => {
@@ -12,7 +11,7 @@ const useTests = () => {
                 setLoading(false)
             })
     }, [])
-    return[items,loading];
+    return [items, loading];
 };
 
 export default useTests;

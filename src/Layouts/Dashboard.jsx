@@ -12,7 +12,7 @@ import { MdOutlineContactPhone } from "react-icons/md";
 import useAuth from "../hooks/useAuth";
 
 const Dashboard = () => {
-    const isAdmin = false;
+    const isAdmin = true;
     const { user } = useAuth();
 
     return (
