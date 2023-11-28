@@ -1,9 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
-// import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { FaUsers } from "react-icons/fa";
 import Swal from "sweetalert2";
 import Text from "../../../Components/shared/Text.jsx/Text";
+// import useAllUser from "../../../hooks/useAllUser";
+import axios from "axios";
+// import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 
@@ -16,6 +19,8 @@ const AllUsers = () => {
             return res.data;
         }
     })
+
+    // const [users]=useAllUser();
 
     console.log(users);
     const handleDeleteUser = (id) => {
@@ -51,16 +56,16 @@ const AllUsers = () => {
 
     // update user
 
-    // const handleUpdateUser = (id) => {
-    //     axiosPublic.patch(`/users/admin/${id}`)
-    //         .then((res) => {
-    //             console.log(res.data);
-    //             if (res.data.modifiedCount > 0) {
-    //                 refetch()
-    //                 Swal.fire(`User successfully update to admin`);
-    //             }
-    //         })
-    // }
+    const handleUpdateUser = (id) => {
+        axiosSecure.patch(`/users/admin/${id}`)
+            .then((res) => {
+                console.log(res.data);
+                if (res.data.modifiedCount > 0) {
+                    refetch()
+                    Swal.fire(`User successfully update to admin`);
+                }
+            })
+    }
 
 
 

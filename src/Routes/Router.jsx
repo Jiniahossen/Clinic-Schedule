@@ -17,6 +17,8 @@ import AllBanners from "../pages/Dashboard/Admin/AllBanners";
 import UserTest from "../pages/Dashboard/User/UserTest";
 import Alltest from "../pages/AllTest/Alltest";
 import Details from "../pages/Details.jsx/Details";
+import RecommendationsPage from "../pages/RcommendationPage/RecommendationsPage";
+import RecommendationsDetails from "../pages/RcommendationPage/RecommendationsDetails";
 
 const Router = createBrowserRouter(
     [
@@ -36,6 +38,17 @@ const Router = createBrowserRouter(
                     path:'/details/:id',
                     element:<Details></Details>,
                     loader:({params})=>fetch(`http://localhost:5000/tests/${params.id}`)
+                },
+                {
+                    path:'/recommendations',
+                    element:<RecommendationsPage></RecommendationsPage>
+                    
+                },
+                {
+                    path:'/recommendation-details/:id',
+                    element:<RecommendationsDetails></RecommendationsDetails>,
+                    loader:({params})=>fetch(`http://localhost:5000/recommendations/${params.id}`)
+                    
                 }
             ]
         },

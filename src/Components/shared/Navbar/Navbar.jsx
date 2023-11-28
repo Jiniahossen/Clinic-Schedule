@@ -57,14 +57,26 @@ const Navbar = ({ children }) => {
                                             </NavLink>
                                         </div>
                                         
+                                       {
+                                        user?  <div>
+                                        <NavLink
+                                            to="/dashboard"
+                                            className={({ isActive, isPending }) =>
+                                                isPending ? "px-4 py-1 bg-none text-lg font-serif text-black" : isActive ? "px-4 py-1  text-lg font-serif text-[#219f85]" : ""
+                                            }
+                                        >
+                                            Dashboard
+                                        </NavLink>
+                                    </div>:<></>
+                                       }
                                         <div>
                                             <NavLink
-                                                to="/dashboard"
+                                                to="/recommendations"
                                                 className={({ isActive, isPending }) =>
                                                     isPending ? "px-4 py-1 bg-none text-lg font-serif text-black" : isActive ? "px-4 py-1  text-lg font-serif text-[#219f85]" : ""
                                                 }
                                             >
-                                                Dashboard
+                                                Recommendations
                                             </NavLink>
                                         </div>
                                     </ul>
