@@ -3,9 +3,6 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 import { FaUsers } from "react-icons/fa";
 import Swal from "sweetalert2";
 import Text from "../../../Components/shared/Text.jsx/Text";
-// import useAllUser from "../../../hooks/useAllUser";
-import axios from "axios";
-// import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
@@ -20,7 +17,6 @@ const AllUsers = () => {
         }
     })
 
-    // const [users]=useAllUser();
 
     console.log(users);
     const handleDeleteUser = (id) => {
@@ -68,10 +64,8 @@ const AllUsers = () => {
     }
 
 
-
-
     return (
-        <div className="bg-[#f6f6f6]">
+        <div className="">
             <div>
                 <Text Heading={'Manage All Users'} subHeading={'How many??'}></Text>
             </div>
@@ -84,7 +78,7 @@ const AllUsers = () => {
                 <div className="min-h-screen bg-white">
                     <div className="overflow-x-auto">
                         <table className="table">
-                            <thead className=" bg-[#d1a054]">
+                            <thead className=" bg-[#219f85]">
                                 <tr>
                                     <th>
                                     </th>
