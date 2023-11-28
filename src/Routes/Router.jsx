@@ -19,6 +19,8 @@ import Alltest from "../pages/AllTest/Alltest";
 import Details from "../pages/Details.jsx/Details";
 import RecommendationsPage from "../pages/RcommendationPage/RecommendationsPage";
 import RecommendationsDetails from "../pages/RcommendationPage/RecommendationsDetails";
+import AboutUs from "../pages/Aboutus/AboutUs";
+import ContactUs from "../pages/ContactUs/ContactUs";
 
 const Router = createBrowserRouter(
     [
@@ -49,6 +51,14 @@ const Router = createBrowserRouter(
                     element:<RecommendationsDetails></RecommendationsDetails>,
                     loader:({params})=>fetch(`http://localhost:5000/recommendations/${params.id}`)
                     
+                },
+                {
+                    path:'/about-us',
+                    element:<AboutUs></AboutUs>
+                },
+                {
+                    path:'/contact-us',
+                    element:<ContactUs></ContactUs>
                 }
             ]
         },

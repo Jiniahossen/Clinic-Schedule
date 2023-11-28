@@ -24,9 +24,6 @@ const AddTest = () => {
         const imageData = await imageUpload(image);
         console.log(imageData);
         // console.log(postingDate,name,price,slots,details,imageData);
-
-
-
         const testItems={
             postingDate,
             name,

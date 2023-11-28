@@ -4,7 +4,7 @@ import { FaUserAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 
 const Navbar = ({ children }) => {
-    
+
     const { user, logOut } = useAuth()
 
     const handleLogOut = () => {
@@ -33,7 +33,7 @@ const Navbar = ({ children }) => {
                                         {/* <h1 className=" text-[#f47723] font-extrabold font-serif text-2xl">Apply4you</h1> */}
                                     </div>
                                 </div>
-                                <div  className="flex-none  lg:block text-lg font-serif me-0 md:me-32 " id="large-device-menu" >
+                                <div className="flex-none  lg:block text-lg font-serif me-0 md:me-32 " id="large-device-menu" >
                                     <ul className=" menu-horizontal gap-6">
                                         {/* Navbar menu content here */}
                                         <div >
@@ -56,19 +56,19 @@ const Navbar = ({ children }) => {
                                                 All Test
                                             </NavLink>
                                         </div>
-                                        
-                                       {
-                                        user?  <div>
-                                        <NavLink
-                                            to="/dashboard"
-                                            className={({ isActive, isPending }) =>
-                                                isPending ? "px-4 py-1 bg-none text-lg font-serif text-black" : isActive ? "px-4 py-1  text-lg font-serif text-[#219f85]" : ""
-                                            }
-                                        >
-                                            Dashboard
-                                        </NavLink>
-                                    </div>:<></>
-                                       }
+
+                                        {
+                                            user ? <div>
+                                                <NavLink
+                                                    to="/dashboard"
+                                                    className={({ isActive, isPending }) =>
+                                                        isPending ? "px-4 py-1 bg-none text-lg font-serif text-black" : isActive ? "px-4 py-1  text-lg font-serif text-[#219f85]" : ""
+                                                    }
+                                                >
+                                                    Dashboard
+                                                </NavLink>
+                                            </div> : <></>
+                                        }
                                         <div>
                                             <NavLink
                                                 to="/recommendations"
@@ -77,6 +77,26 @@ const Navbar = ({ children }) => {
                                                 }
                                             >
                                                 Recommendations
+                                            </NavLink>
+                                        </div>
+                                        <div>
+                                            <NavLink
+                                                to="/about-us"
+                                                className={({ isActive, isPending }) =>
+                                                    isPending ? "px-4 py-1 bg-none text-lg font-serif text-black" : isActive ? "px-4 py-1  text-lg font-serif text-[#219f85]" : ""
+                                                }
+                                            >
+                                                About Us
+                                            </NavLink>
+                                        </div>
+                                        <div>
+                                            <NavLink
+                                                to="/contact-us"
+                                                className={({ isActive, isPending }) =>
+                                                    isPending ? "px-4 py-1 bg-none text-lg font-serif text-black" : isActive ? "px-4 py-1  text-lg font-serif text-[#219f85]" : ""
+                                                }
+                                            >
+                                                Contact Us
                                             </NavLink>
                                         </div>
                                     </ul>
@@ -103,8 +123,8 @@ const Navbar = ({ children }) => {
                                                 <div className="navbar-end flex gap-2">
                                                     <div className="dropdown dropdown-end">
                                                         <label tabIndex={0} className="btn btn-circle avatar">
-                                                                <FaUserAlt className="w-ull text-center  text-2xl"></FaUserAlt>
-                                                            
+                                                            <FaUserAlt className="w-ull text-center  text-2xl"></FaUserAlt>
+
                                                         </label>
                                                         <ul tabIndex={0} className="mt-3 z-[1] shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-40 gap-2">
                                                             <li>
@@ -124,36 +144,71 @@ const Navbar = ({ children }) => {
                         <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
                         <ul className="menu p-4 w-80 min-h-full bg-base-200 gap-6 text-lg font-serif">
                             {/* Sidebar content here */}
+
                             <div >
                                 <NavLink
                                     to="/"
                                     className={({ isActive, isPending }) =>
-                                        isPending ? "px-4 py-1 bg-none text-lg font-serif text-black" : isActive ? "px-4 py-1 bg-[#3748ff] text-lg font-serif text-white" : ""
+                                        isPending ? "px-4 py-1 bg-none text-lg font-serif text-black" : isActive ? "px-4 py-1  text-lg font-serif text-[#219f85]" : ""
                                     }
                                 >
                                     Home
                                 </NavLink>
                             </div>
-                            <div>
+                            <div >
                                 <NavLink
-                                    to="/all-jobs"
+                                    to="/all-tests"
                                     className={({ isActive, isPending }) =>
-                                        isPending ? "px-2 py-1 bg-none text-lg font-serif text-black" : isActive ? "px-2 py-1 bg-[#3748ff] text-lg font-serif text-white" : ""
+                                        isPending ? "px-4 py-1 bg-none text-lg font-serif text-black" : isActive ? "px-4 py-1  text-lg font-serif text-[#219f85]" : ""
                                     }
                                 >
-                                    All Jobs
+                                    All Test
+                                </NavLink>
+                            </div>
+
+                            {
+                                user ? <div>
+                                    <NavLink
+                                        to="/dashboard"
+                                        className={({ isActive, isPending }) =>
+                                            isPending ? "px-4 py-1 bg-none text-lg font-serif text-black" : isActive ? "px-4 py-1  text-lg font-serif text-[#219f85]" : ""
+                                        }
+                                    >
+                                        Dashboard
+                                    </NavLink>
+                                </div> : <></>
+                            }
+                            <div>
+                                <NavLink
+                                    to="/recommendations"
+                                    className={({ isActive, isPending }) =>
+                                        isPending ? "px-4 py-1 bg-none text-lg font-serif text-black" : isActive ? "px-4 py-1  text-lg font-serif text-[#219f85]" : ""
+                                    }
+                                >
+                                    Recommendations
                                 </NavLink>
                             </div>
                             <div>
                                 <NavLink
-                                    to="/blogs"
+                                    to="/about-us"
                                     className={({ isActive, isPending }) =>
-                                        isPending ? "px-4 py-1 bg-none text-lg font-serif text-black" : isActive ? "px-4 py-1 bg-[#3748ff] text-lg font-serif text-white" : ""
+                                        isPending ? "px-4 py-1 bg-none text-lg font-serif text-black" : isActive ? "px-4 py-1  text-lg font-serif text-[#219f85]" : ""
                                     }
                                 >
-                                    Blogs
+                                    About Us
                                 </NavLink>
                             </div>
+                            <div>
+                                <NavLink
+                                    to="/contact-us"
+                                    className={({ isActive, isPending }) =>
+                                        isPending ? "px-4 py-1 bg-none text-lg font-serif text-black" : isActive ? "px-4 py-1  text-lg font-serif text-[#219f85]" : ""
+                                    }
+                                >
+                                    Contact Us
+                                </NavLink>
+                            </div>
+
                         </ul>
                     </div>
                 </div>

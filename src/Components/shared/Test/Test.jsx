@@ -5,6 +5,11 @@ import { Link } from "react-router-dom";
 const Test = ({ item }) => {
     console.log(item);
     const { name, price, details, slots, postingDate, image ,_id} = item || {};
+
+
+     // Format the dates string in the format
+
+     
     const formatDate = (dateString) => {
         const dateObj = new Date(dateString);
         const day = dateObj.getDate();
