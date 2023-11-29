@@ -31,7 +31,7 @@ const AllUsers = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             console.log(result);
-            if (result.isConfirmed===true) {
+            if (result.isConfirmed === true) {
                 axiosSecure.delete(`/users/${id}`)
                     .then((res) => {
                         if (res.data.deletedCount > 0) {
@@ -44,7 +44,7 @@ const AllUsers = () => {
                         }
                     })
 
-                    refetch();
+                refetch();
             }
         });
     }
@@ -63,6 +63,43 @@ const AllUsers = () => {
             })
     }
 
+    const handleDeleteStatus = (id) => {
+        console.log(id);
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, block!"
+        }).then((result) => {
+            console.log(result);
+            if (result.isConfirmed === true) {
+                axiosSecure.patch(`/users/blocked/${id}`)
+                    .then((res) => {
+                        console.log(res.data);
+                        if (res.data.modifiedCount > 0) {
+                            refetch()
+                            Swal.fire(`You have blockeed the user!`);
+                        }
+                    })
+
+                refetch();
+            }
+        });
+    }
+
+    // const handleDeleteStatus = (id) => {
+    //     axiosSecure.patch(`/users/admin/blocked/${id}`)
+    //         .then((res) => {
+    //             console.log(res.data);
+    //             if (res.data.modifiedCount > 0) {
+    //                 refetch()
+    //                 Swal.fire(`You have blockeed the user!`);
+    //             }
+    //         })
+    // }
 
     return (
         <div className="">
@@ -70,11 +107,6 @@ const AllUsers = () => {
                 <Text Heading={'Manage All Users'} subHeading={'How many??'}></Text>
             </div>
             <div className=" p-4">
-                <div className="px-6 pt-6 uppercase items-center text-2xl font-serif text-black bg-white">
-                    <h1 className=" font-serif font-bold justify-start">
-                        Total users : <span className=" font-serif font-bold">{users.length}</span>
-                    </h1>
-                </div>
                 <div className="min-h-screen bg-white">
                     <div className="overflow-x-auto">
                         <table className="table">
@@ -85,10 +117,11 @@ const AllUsers = () => {
                                     <th className=" text-lg font-serif text-white">Name</th>
                                     <th className=" text-lg font-serif text-white">Email</th>
                                     <th className=" text-lg font-serif text-white">Role</th>
+                                    <th className=" text-lg font-serif text-white">Status</th>
                                     <th className=" text-lg font-serif text-white">Action</th>
                                 </tr>
                             </thead>
-                            <tbody className=" items-center justify-center">
+                            <tbody className="items-center justify-center">
                                 {
                                     users.map((user, index) =>
                                         <tr key={user._id}>
@@ -109,14 +142,22 @@ const AllUsers = () => {
                                                         </button>
                                                 }
                                             </td>
-                                            <th>
+                                            <td>
+                                                {
+                                                    user.status === 'blocked' ? <><h1 className=" text-base font-serif text-black">Blocked</h1></> :
+                                                        <button className=" text-md p-1 rounded-sm text-white font-serif bg-green-600" onClick={() => handleDeleteStatus(user._id)}>
+                                                            Active
+                                                        </button>
+                                                }
+                                            </td>
+                                            <th className="flex items-center gap-4">
                                                 <button className=" text-2xl p-1 rounded-sm text-white bg-[#b91c1b]" onClick={() => handleDeleteUser(user._id)}>
                                                     <RiDeleteBin5Line></RiDeleteBin5Line>
                                                 </button>
+
                                             </th>
                                         </tr>)
                                 }
-
 
                             </tbody>
                         </table>

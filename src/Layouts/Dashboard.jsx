@@ -12,7 +12,8 @@ import { MdOutlineContactPhone } from "react-icons/md";
 import DashboardNavbar from "../pages/Dashboard/Admin/DashboardNavbar/DashboardNavbar";
 
 const Dashboard = () => {
-    const isAdmin = true;
+    // const [isAdmin] = useAdmin()
+    const isAdmin=true;
 
     return (
         <div className="max-w-full min-h-screen">

@@ -40,11 +40,11 @@ const Alltest = () => {
                     />
                 </div>
             </div>
-            <div>
+            <div className="mb-20">
                 {filteredItems.length === 0 && startDate ? (
                     <p>No tests available for the selected date.</p>
                 ) : (
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
                         {filteredItems.map(item => (
                             <Test key={item._id} item={item}></Test>
                         ))}
