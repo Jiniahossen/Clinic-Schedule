@@ -4,10 +4,11 @@ import Swal from "sweetalert2";
 import { useState } from "react";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import useAuth from "../../hooks/useAuth";
-import FeaturedPost from "../Home/Shared/Featuredpost/FeaturedPost";
-import PopularPost from "./PopularPost";
+import useAllBanners from "../../hooks/useAllbanners";
 
 const Details = () => {
+    const [banners] = useAllBanners();
+    const activeBanner = banners.find(banner => banner.isActive === true);
     const [disable, setDisable] = useState(false);
     const [promoCode, setPromoCode] = useState('');
     const data = useLoaderData();
@@ -36,8 +37,8 @@ const Details = () => {
         }
 
         // Assuming the discount applies only for the "TEST06" promo code
-        if (promoCode.toUpperCase() === 'TEST06') {
-            const discountPercentage = 10; // 10% discount
+        if (promoCode.toUpperCase() === activeBanner?.cuponname) {
+            const discountPercentage = activeBanner?.cuponrate; // 10% discount
             const discountAmount = (price * discountPercentage) / 100;
             const discountedAmount = price - discountAmount;
             return discountedAmount >= 0 ? discountedAmount.toFixed(2) : '0.00';
@@ -55,14 +56,15 @@ const Details = () => {
 
             // Prepare the data for booking
             const bookInfo = {
-                status: "pending",
                 email,
                 userName,
+                time,
                 id: id,
                 image: data.image,
                 name: data.name,
                 price: discountedAmount,
                 slots: data.slots,
+                report:'pending'
             };
 
             if (data.slots === 0) {

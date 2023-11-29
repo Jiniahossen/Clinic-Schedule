@@ -1,7 +1,6 @@
-import { RiDeleteBin5Line } from "react-icons/ri";
+import { RxCross1 } from "react-icons/rx";
 import Text from "../../../Components/shared/Text.jsx/Text";
 import useAllBooks from "../../../hooks/useAllBooks";
-import { FaEdit } from "react-icons/fa";
 import { useState } from "react";
 
 const Reservation = () => {
@@ -15,6 +14,10 @@ const Reservation = () => {
         );
         return filteredBooks;
     };
+
+    const handlCancle = (id) => {
+        console.log(id);
+    }
 
     return (
         <div>
@@ -81,15 +84,9 @@ const Reservation = () => {
                                         <td className="flex gap-4 items-center">
                                             <button
                                                 className="text-2xl text-red-500"
-                                                onClick={() => handleDelete(item._id)}
+                                                onClick={() => handlCancle(item._id)}
                                             >
-                                                <RiDeleteBin5Line />
-                                            </button>
-                                            <button
-                                                className="text-2xl text-green-600"
-                                                onClick={() => handleUpdate(item._id)}
-                                            >
-                                                <FaEdit />
+                                                <RxCross1></RxCross1>
                                             </button>
                                         </td>
                                     </tr>

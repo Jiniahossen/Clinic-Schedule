@@ -1,7 +1,9 @@
 import Container from "../../Components/shared/Container/Container";
 import FeaturedPost from "./Shared/Featuredpost/FeaturedPost";
 import Recommend from "./Shared/Recommendations/Recommend";
-import FaqSection from './Shared/F&Q-section/FaqSection'
+import FaqSection from './Shared/F&Q-section/FaqSection';
+import BannerSection from "./Shared/BannerSection/BannerSection"
+
 
 
 const Home = () => {
@@ -10,7 +12,7 @@ const Home = () => {
             <div>
                 {/* banner section */}
                 <div>
-                  
+                <BannerSection></BannerSection>
                 </div>
 
                 {/* body section */}
@@ -21,11 +23,12 @@ const Home = () => {
                             <Recommend></Recommend>
                         </div>
                     </div>
-                    <div className="w-96 items-end">
-                        <h1 className="text-xl font-serif font-semibold text-center">Featured Test:</h1>
-                        <div>
-                            <FeaturedPost></FeaturedPost>
-                        </div>
+                </div>
+                {/* featured test */}
+                <div className=" items-end">
+                    <h1 className="text-3xl my-6 font-serif font-semibold text-center">Featured Test:</h1>
+                    <div>
+                        <FeaturedPost></FeaturedPost>
                     </div>
                 </div>
 

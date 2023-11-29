@@ -9,11 +9,11 @@ import { FiMenu } from "react-icons/fi";
 import { GiVerticalBanner } from "react-icons/gi";
 import { CgNotes } from "react-icons/cg";
 import { MdOutlineContactPhone } from "react-icons/md";
-import DashboardNavbar from "../pages/Dashboard/Admin/DashboardNavbar/DashboardNavbar";
+import useAdmin from "../hooks/useAdmin";
+import DashboardNavbar from "../pages/Dashboard/DashboardNavbar/DashboardNavbar";
 
 const Dashboard = () => {
-    // const [isAdmin] = useAdmin()
-    const isAdmin=true;
+    const [isAdmin] = useAdmin();
 
     return (
         <div className="max-w-full min-h-screen">

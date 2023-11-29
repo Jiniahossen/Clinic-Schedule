@@ -43,8 +43,6 @@ const AllUsers = () => {
                             });
                         }
                     })
-
-                refetch();
             }
         });
     }
@@ -90,17 +88,6 @@ const AllUsers = () => {
         });
     }
 
-    // const handleDeleteStatus = (id) => {
-    //     axiosSecure.patch(`/users/admin/blocked/${id}`)
-    //         .then((res) => {
-    //             console.log(res.data);
-    //             if (res.data.modifiedCount > 0) {
-    //                 refetch()
-    //                 Swal.fire(`You have blockeed the user!`);
-    //             }
-    //         })
-    // }
-
     return (
         <div className="">
             <div>
@@ -115,9 +102,9 @@ const AllUsers = () => {
                                     <th>
                                     </th>
                                     <th className=" text-lg font-serif text-white">Name</th>
-                                    <th className=" text-lg font-serif text-white">Email</th>
                                     <th className=" text-lg font-serif text-white">Role</th>
                                     <th className=" text-lg font-serif text-white">Status</th>
+                                    <th className=" text-lg font-serif text-white">See info</th>
                                     <th className=" text-lg font-serif text-white">Action</th>
                                 </tr>
                             </thead>
@@ -130,9 +117,6 @@ const AllUsers = () => {
                                             </th>
                                             <td>
                                                 <h1 className=" text-base font-serif text-black">{user.name}</h1>
-                                            </td>
-                                            <td>
-                                                <h1 className=" text-base font-serif text-black">{user?.email}</h1>
                                             </td>
                                             <td>
                                                 {
@@ -149,6 +133,25 @@ const AllUsers = () => {
                                                             Active
                                                         </button>
                                                 }
+                                            </td>
+                                            <td>
+                                                <button className="bg-[#219f85] px-2 py-1 rounded-sm text-white font-serif" onClick={() => document.getElementById('my_modal_5').showModal()}>See info</button>
+                                                <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+                                                    <div className="modal-box">
+                                                        <div className="p-6">
+                                                            <h1 className=" text-base font-serif text-black">Name:{user.name}</h1>
+                                                            <h1 className=" text-base font-serif text-black">Email:{user.email}</h1>
+                                                            {/* {
+                                                                user.role?<><h1 className=" text-base font-serif text-black">Role:{user.role}</h1></>:<><h1 className=" text-base font-serif text-black">User</h1></>
+                                                            } */}
+                                                        </div>
+                                                        <div className="modal-action">
+                                                            <form method="dialog text-center">
+                                                                <button className="bg-[#219f85] px-2 py-1 rounded-sm text-white font-serif">Close</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </dialog>
                                             </td>
                                             <th className="flex items-center gap-4">
                                                 <button className=" text-2xl p-1 rounded-sm text-white bg-[#b91c1b]" onClick={() => handleDeleteUser(user._id)}>
