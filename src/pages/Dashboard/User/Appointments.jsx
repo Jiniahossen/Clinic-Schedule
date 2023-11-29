@@ -1,6 +1,7 @@
 import Text from "../../../Components/shared/Text.jsx/Text";
 import useAppointments from "../../../hooks/useAppointments";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { RxCross1 } from "react-icons/rx";
 import Swal from "sweetalert2";
 
 const Appointments = () => {
@@ -31,7 +32,6 @@ const Appointments = () => {
                             });
                         }
                     })
-
             }
         });
     }
@@ -83,9 +83,9 @@ const Appointments = () => {
                                                     <td className="">
                                                         <h1 className=" text-base font-serif">{item.time}</h1>
                                                     </td>
-                                                    <th className="flex gap-4 items-center">
-                                                        <button className=" text-lg text-red-500" onClick={() => handleDelete(item._id)}>
-                                                            Cancle
+                                                    <th className="flex  gap-4 items-center text-center">
+                                                        <button className="pt-6 ps-4 text-xl md:ps-4 md:pt-4 text-red-500" onClick={() => handleDelete(item._id)}>
+                                                          <RxCross1></RxCross1>  
                                                         </button>
                                                     </th>
                                                 </tr>)

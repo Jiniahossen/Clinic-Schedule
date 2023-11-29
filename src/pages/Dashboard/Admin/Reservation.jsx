@@ -8,7 +8,6 @@ const Reservation = () => {
     const [searchEmail, setSearchEmail] = useState('');
 
     const handleSearch = () => {
-        // Perform a case-insensitive search by email
         const filteredBooks = books.filter((book) =>
             book.email.toLowerCase().includes(searchEmail.toLowerCase())
         );

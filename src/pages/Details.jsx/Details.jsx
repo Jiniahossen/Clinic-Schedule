@@ -92,8 +92,8 @@ const Details = () => {
 
     return (
         <Container>
-            <div className="mt-20 text-center md:text-start md:flex gap-4 md:gap-20">
-                <div className="h-80 w-42">
+            <div className="my-20 text-center md:text-start md:flex gap-4 md:gap-20">
+                <div className="h-80 w-full md:w-[600px]">
                     <img src={data.image} className="w-full h-full" alt="" />
                 </div>
                 <div>
