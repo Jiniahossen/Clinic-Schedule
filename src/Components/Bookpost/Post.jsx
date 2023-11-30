@@ -17,7 +17,7 @@ const Post = ({ item }) => {
                 <div className=' mx-auto mb-4 text-center'>
                     <Link to={`/all-tests`}>
                         <div className="flex items-center">
-                            <button className="px-2 py-1 text-lg font-serif text-[#219f85]">View Details</button>
+                            <button className="px-2 py-1 text-lg font-serif text-[#219f85]">View Post</button>
                             <FcRight className="text-2xl"></FcRight>
                         </div>
                     </Link>

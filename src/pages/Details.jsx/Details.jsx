@@ -5,6 +5,10 @@ import { useState } from "react";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import useAuth from "../../hooks/useAuth";
 import useAllBanners from "../../hooks/useAllbanners";
+import Chekout from "./Checkout";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+const stripePromise = loadStripe('pk_test_51OEaNNDx31JwCkBvH0aQbU2WVp5iZZSZopHKP9l1RX8mFCtkmgYzoYqIq5pBmE6AO9OzwxkMcdQBVAbRHJPrNdOM00dMDCpxpD')
 
 const Details = () => {
     const [banners] = useAllBanners();
@@ -64,7 +68,7 @@ const Details = () => {
                 name: data.name,
                 price: discountedAmount,
                 slots: data.slots,
-                report:'pending'
+                report: 'pending'
             };
 
             if (data.slots === 0) {
@@ -122,6 +126,10 @@ const Details = () => {
                                 </div>
                                 <div className="text-black">
                                     <p>Final Total: ${calculateDiscountedAmount()}</p>
+                                    <Elements stripe={stripePromise}>
+                                        <Chekout discountedAmount={calculateDiscountedAmount()} handleBook={handleBook} dataId={data._id} />
+                                    </Elements>
+
                                 </div>
                                 <div>
                                 </div>
@@ -136,9 +144,6 @@ const Details = () => {
                     </button>
                 </div>
             </div>
-            {/* <div className="">
-                <PopularPost></PopularPost>
-            </div> */}
         </Container>
     );
 };
