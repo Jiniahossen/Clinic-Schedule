@@ -55,6 +55,7 @@ const Appointments = () => {
                                             <th className=" text-lg font-serif text-white">Test name</th>
                                             <th className=" text-lg font-serif text-white">Price</th>
                                             <th className=" text-lg font-serif text-white">Time</th>
+                                            <th className=" text-lg font-serif text-white">Report Status</th>
                                             <th className=" text-lg font-serif text-white">Action</th>
                                         </tr>
                                     </thead>
@@ -82,6 +83,9 @@ const Appointments = () => {
                                                     </td>
                                                     <td className="">
                                                         <h1 className=" text-base font-serif">{item.time}</h1>
+                                                    </td>
+                                                    <td className="">
+                                                        <h1 className="ps-4 text-base font-serif text-blue-600">{item.report}</h1>
                                                     </td>
                                                     <th className="flex  gap-4 items-center text-center">
                                                         <button className="pt-6 ps-4 text-xl md:ps-4 md:pt-4 text-red-500" onClick={() => handleDelete(item._id)}>

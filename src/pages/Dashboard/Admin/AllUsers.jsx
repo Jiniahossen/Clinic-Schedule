@@ -1,13 +1,14 @@
-
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { FaUsers } from "react-icons/fa";
 import Swal from "sweetalert2";
 import Text from "../../../Components/shared/Text.jsx/Text";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useState } from "react";
 
 
 const AllUsers = () => {
+    const [selectedUser, setSelectedUser] = useState(null);
     const axiosSecure = useAxiosSecure();
     const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
@@ -17,8 +18,16 @@ const AllUsers = () => {
         }
     })
 
+    const handleSeeInfo = (user) => {
+        setSelectedUser(user);
+        document.getElementById('my_modal_5').showModal();
+    };
 
-    console.log(users);
+    const handleCloseModal = () => {
+        setSelectedUser(null);
+        document.getElementById('my_modal_5').close();
+    };
+
     const handleDeleteUser = (id) => {
         console.log(id);
         Swal.fire({
@@ -135,19 +144,32 @@ const AllUsers = () => {
                                                 }
                                             </td>
                                             <td>
-                                                <button className="bg-[#219f85] px-2 py-1 rounded-sm text-white font-serif" onClick={() => document.getElementById('my_modal_5').showModal()}>See info</button>
+
+                                                <button
+                                                    className="bg-[#219f85] px-2 py-1 rounded-sm text-white font-serif"
+                                                    onClick={() => handleSeeInfo(user)}
+                                                >
+                                                    See info
+                                                </button>
                                                 <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+                                                    {/* ... */}
                                                     <div className="modal-box">
                                                         <div className="p-6">
-                                                            <h1 className=" text-base font-serif text-black">Name:{user.name}</h1>
-                                                            <h1 className=" text-base font-serif text-black">Email:{user.email}</h1>
-                                                            {/* {
-                                                                user.role?<><h1 className=" text-base font-serif text-black">Role:{user.role}</h1></>:<><h1 className=" text-base font-serif text-black">User</h1></>
-                                                            } */}
+                                                            {selectedUser && (
+                                                                <>
+                                                                    <h1 className="text-base font-serif text-black">Name: {selectedUser.name}</h1>
+                                                                    <h1 className="text-base font-serif text-black">Email: {selectedUser.email}</h1>
+                                                                </>
+                                                            )}
                                                         </div>
                                                         <div className="modal-action">
                                                             <form method="dialog text-center">
-                                                                <button className="bg-[#219f85] px-2 py-1 rounded-sm text-white font-serif">Close</button>
+                                                                <button
+                                                                    className="bg-[#219f85] px-2 py-1 rounded-sm text-white font-serif"
+                                                                    onClick={handleCloseModal}
+                                                                >
+                                                                    Close
+                                                                </button>
                                                             </form>
                                                         </div>
                                                     </div>

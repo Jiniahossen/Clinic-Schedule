@@ -2,10 +2,15 @@ import { RxCross1 } from "react-icons/rx";
 import Text from "../../../Components/shared/Text.jsx/Text";
 import useAllBooks from "../../../hooks/useAllBooks";
 import { useState } from "react";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
+import { imageUpload } from "../../../hooks/useImages";
 
 const Reservation = () => {
-    const [books, loading] = useAllBooks();
+    const [books, refetch] = useAllBooks();
+    const [selectedUser, setSelectedUser] = useState(null);
     const [searchEmail, setSearchEmail] = useState('');
+    const axiosSecure = useAxiosSecure();
 
     const handleSearch = () => {
         const filteredBooks = books.filter((book) =>
@@ -17,6 +22,46 @@ const Reservation = () => {
     const handlCancle = (id) => {
         console.log(id);
     }
+
+    const handleSeeInfo = (user) => {
+        setSelectedUser(user);
+        document.getElementById('my_modal_5').showModal();
+    };
+
+    const handleCloseModal = () => {
+
+        setSelectedUser(null);
+        document.getElementById('my_modal_5').close();
+    };
+
+    const handleUpdateReport = async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const id = selectedUser._id;
+        const image = form.elements.image.files[0];
+
+        if (!image) {
+            return Swal.fire('Please select an image for the report.');
+        }
+
+        const imageData = await imageUpload(image);
+
+        try {
+            await axiosSecure.put(`/book/${id}`, {
+                testReport: imageData?.data?.display_url,
+            });
+
+            Swal.fire('Report submitted successfully!');
+            refetch();
+            handleCloseModal();
+        } catch (error) {
+            console.error("Error updating report:", error);
+            Swal.fire('Error submitting report. Please try again.');
+        }
+    }
+
+
+
 
     return (
         <div>
@@ -52,6 +97,7 @@ const Reservation = () => {
                                     <th className="text-lg font-serif text-white">Email</th>
                                     <th className="text-lg font-serif text-white">Price</th>
                                     <th className="text-lg font-serif text-white">Action</th>
+                                    <th className="text-lg font-serif text-white">Report</th>
                                 </tr>
                             </thead>
                             <tbody className="items-center justify-center">
@@ -80,7 +126,7 @@ const Reservation = () => {
                                         <td className="">
                                             <h1 className="text-base font-serif">{item.price}</h1>
                                         </td>
-                                        <td className="flex gap-4 items-center">
+                                        <td className=" gap-4 items-center">
                                             <button
                                                 className="text-2xl text-red-500"
                                                 onClick={() => handlCancle(item._id)}
@@ -88,6 +134,58 @@ const Reservation = () => {
                                                 <RxCross1></RxCross1>
                                             </button>
                                         </td>
+                                        <td className="gap-4 items-center">
+                                            {
+                                                item?.report === 'delivered' ? <> <h1 className="text-base font-serif">Submitted</h1></> : <><button
+                                                    className="bg-[#219f85] px-2 py-1 rounded-sm text-white font-serif"
+                                                    onClick={() => handleSeeInfo(item)}
+                                                >
+                                                    Submit Report
+                                                </button></>
+                                            }
+                                            <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+                                                {/* ... */}
+                                                <div className="modal-box">
+                                                    <div className="p-6">
+                                                        {selectedUser && (
+                                                            <>
+                                                                <h1 className="text-base font-serif text-black">Email: {selectedUser.email}</h1>
+                                                                <form onSubmit={(e) => { e.preventDefault(); handleUpdateReport(e); }}>
+                                                                    <div className="mb-6">
+                                                                        <label className="label">
+                                                                            <span className="text-lg font-serif text-white">Report:</span>
+                                                                        </label>
+                                                                        <input
+                                                                            required
+                                                                            type='file'
+                                                                            id='image'
+                                                                            name='image'
+                                                                            accept='image/*'
+                                                                            className="text-base font-serif text-black"
+                                                                        />
+                                                                    </div>
+                                                                    <div className="flex gap-6">
+                                                                        <button
+                                                                            type="submit"
+                                                                            className="bg-[#219f85] px-2 py-1 rounded-sm text-white font-serif"
+                                                                        >
+                                                                            Upload report
+                                                                        </button>
+                                                                        <button
+                                                                            className="bg-[#219f85] px-2 py-1 rounded-sm text-white font-serif"
+                                                                            onClick={handleCloseModal}
+                                                                        >
+                                                                            Close
+                                                                        </button>
+                                                                    </div>
+                                                                </form>
+                                                            </>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            </dialog>
+                                        </td>
+
                                     </tr>
                                 ))}
                             </tbody>

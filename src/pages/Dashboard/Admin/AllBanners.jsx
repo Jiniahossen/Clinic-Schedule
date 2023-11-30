@@ -47,16 +47,18 @@ const AllBanners = () => {
         });
     }
 
-
-
-
     //update isActive value 
 
     const handleUpdateBanner = async (id) => {
 
         try {
-            await axiosSecure.put(`/banners/${id}`);
-            refetch(); 
+            await axiosSecure.put(`/banners/${id}`)
+            .then((res)=>{
+                if(res.data.updatedBanner.modifiedCount>0){
+                    Swal.fire('Banner updated successfully!')
+                }
+                refetch(); 
+            })
         } catch (error) {
             console.error("Error updating banner:", error);
         }

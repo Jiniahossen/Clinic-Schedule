@@ -11,21 +11,34 @@ import { CgNotes } from "react-icons/cg";
 import { MdOutlineContactPhone } from "react-icons/md";
 import useAdmin from "../hooks/useAdmin";
 import DashboardNavbar from "../pages/Dashboard/DashboardNavbar/DashboardNavbar";
+import '../index.css'
+import { useState } from "react";
 
 const Dashboard = () => {
     const [isAdmin] = useAdmin();
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const handleMenuToggle = () => {
+        setIsMenuOpen((prev) => !prev);
+    };
 
     return (
         <div className="max-w-full min-h-screen">
             {/* Dashboard NAvbar */}
             <DashboardNavbar></DashboardNavbar>
             <div className=" flex flex-col lg:flex-row">
-                <div className="p-6 w-80 bg-white text-black border border-r-[#219f85] ">
+                <div className="p-6 lg:w-80 bg-white text-black border border-r-[#219f85] ">
                     <div className=" w-72 mx-auto p-6">
-                        <h1 className=" text-xl  md:text-2xl font-serif font-bold  text-[#219f85]">CliniSchedule</h1>
-
+                        <h1 className=" text-xl text-center lg:text-start  md:text-2xl font-serif font-bold  text-[#219f85]">CliniSchedule</h1>
                     </div>
-                    <ul className="menu text-black text-base font-serif gap-4 uppercase" >
+                    <button
+                        className="lg:hidden block text-2xl text-[#219f85] "
+                        onClick={handleMenuToggle}
+                    >
+                        ☰
+                    </button>
+                    <ul className={`menu text-black text-base font-serif gap-4 uppercase ${isMenuOpen ? "block" : "hidden lg:block"
+                        }`} >
                         {
                             isAdmin ? <>
                                 <li>

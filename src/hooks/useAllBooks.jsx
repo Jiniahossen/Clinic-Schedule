@@ -1,18 +1,18 @@
-import { useEffect, useState } from "react";
 
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "./useAxiosSecure";
 
-const useAllBooks = () => {
-    const [books, setBooks] = useState([]);
-    const [loading, setLoading] = useState(true);
-    useEffect(() => {
-        fetch('http://localhost:5000/book')
-            .then((res) => res.json())
-            .then((data) => {
-                setBooks(data)
-                setLoading(false)
-            })
-    }, [])
-    return [books, loading];
+const useAllBook = () => {
+    const axiosSecure = useAxiosSecure();
+    const { refetch, data: book = [] } = useQuery({
+        queryKey: ['book'],
+        queryFn: async() => {
+            const res = await axiosSecure.get(`/book`);
+            return res.data;
+        }
+    })
+
+    return [book, refetch]
 };
 
-export default useAllBooks;
+export default useAllBook;
