@@ -8,7 +8,7 @@ const Appointments = () => {
     const [book, refetch] = useAppointments();
     const axiosSecure = useAxiosSecure();
 
-    console.log(book);
+    const filteredBook = book.filter(item => item.report === 'pending');
 
     const handleDelete = (id) => {
         Swal.fire({
@@ -61,7 +61,7 @@ const Appointments = () => {
                                     </thead>
                                     <tbody className=" items-center justify-center">
                                         {
-                                            book.map((item, index) =>
+                                            filteredBook.map((item, index) =>
                                                 <tr key={item._id}>
                                                     <th>
                                                         {index + 1}
