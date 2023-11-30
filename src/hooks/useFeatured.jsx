@@ -4,7 +4,7 @@ const useFeatured = () => {
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        fetch('http://localhost:5000/book')
+        fetch('https://diagnostic-center-server-azure.vercel.app/book')
             .then((res) => res.json())
             .then((data) => {
                 setItems(data);

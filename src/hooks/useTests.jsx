@@ -4,7 +4,7 @@ const useTests = () => {
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        fetch('http://localhost:5000/tests')
+        fetch('https://diagnostic-center-server-azure.vercel.app/tests')
             .then((res) => res.json())
             .then((data) => {
                 setItems(data);

@@ -4,7 +4,7 @@ const useReccom = () => {
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        fetch('http://localhost:5000/recommendations')
+        fetch('https://diagnostic-center-server-azure.vercel.app/recommendations')
             .then((res) => res.json())
             .then((data) => {
                 setItems(data);

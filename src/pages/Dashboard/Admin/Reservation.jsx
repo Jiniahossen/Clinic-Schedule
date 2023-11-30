@@ -19,10 +19,6 @@ const Reservation = () => {
         return filteredBooks;
     };
 
-    const handlCancle = (id) => {
-        console.log(id);
-    }
-
     const handleSeeInfo = (user) => {
         setSelectedUser(user);
         document.getElementById('my_modal_5').showModal();
@@ -60,6 +56,34 @@ const Reservation = () => {
         }
     }
 
+
+    const handleDelete = (id) => {
+        console.log(id);
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            console.log(result);
+            if (result.isConfirmed === true) {
+                axiosSecure.delete(`/book/${id}`)
+                    .then((res) => {
+                        if (res.data.deletedCount > 0) {
+                            refetch()
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "User has been deleted.",
+                                icon: "success"
+                            });
+                        }
+                    })
+            }
+        });
+    }
 
 
 
@@ -129,7 +153,7 @@ const Reservation = () => {
                                         <td className=" gap-4 items-center">
                                             <button
                                                 className="text-2xl text-red-500"
-                                                onClick={() => handlCancle(item._id)}
+                                                onClick={() => handleDelete(item._id)}
                                             >
                                                 <RxCross1></RxCross1>
                                             </button>

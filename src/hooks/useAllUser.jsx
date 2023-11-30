@@ -5,7 +5,7 @@ const useAllUser = () => {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        fetch('http://localhost:5000/users')
+        fetch('https://diagnostic-center-server-azure.vercel.app/users')
             .then((res) => res.json())
             .then((data) => {
                 setUsers(data)

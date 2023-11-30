@@ -127,7 +127,7 @@ const Dashboard = () => {
                             All Test</NavLink>
                         </li>
                         <li className="mb-4">
-                            <NavLink to='/contactus' className={({ isActive, isPending }) =>
+                            <NavLink to='/contact-us' className={({ isActive, isPending }) =>
                             isPending ? "px-2 py-1 bg-none text-lg text-white font-serif " : isActive ? "px-2 py-1 text-[#219f85] text-lg font-serif" : ""
                         }>
                             <MdOutlineContactPhone className="text-lg md:text-2xl"></MdOutlineContactPhone>

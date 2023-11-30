@@ -63,7 +63,7 @@ const Details = () => {
                 email,
                 userName,
                 time,
-                id: id,
+                bookItemId: id,
                 image: data.image,
                 name: data.name,
                 price: discountedAmount,

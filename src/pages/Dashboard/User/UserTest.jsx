@@ -5,11 +5,11 @@ import { FaDownload } from "react-icons/fa6";
 import download from 'downloadjs';
 
 const UserTest = () => {
-    const [book, refetch] = useAppointments();
+    const [book] = useAppointments();
     const filteredBook = book.filter(item => item.report === 'delivered');
 
     const handleDownload = (imageUrl, fileName) => {
-        const extension = imageUrl.split('.').pop(); // Extract the file extension from the URL
+        const extension = imageUrl.split('.').pop();
         const formattedFileName = `${fileName}.${extension}`;
     
         download(imageUrl, formattedFileName);

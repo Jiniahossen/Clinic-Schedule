@@ -6,7 +6,7 @@ const useAllBanners = () => {
     const [banners, setBanners] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        fetch('http://localhost:5000/banners')
+        fetch('https://diagnostic-center-server-azure.vercel.app/banners')
             .then((res) => res.json())
             .then((data) => {
                 setBanners(data)

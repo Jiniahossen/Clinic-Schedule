@@ -4,7 +4,7 @@ import { FcRight } from "react-icons/fc";
 
 
 const Test = ({ item }) => {
-    console.log(item);
+
     const { name, price, details, slots, postingDate, image, _id } = item || {};
 
 
